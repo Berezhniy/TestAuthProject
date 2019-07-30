@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TestAuthProject</string>
+    <!--OauthClirent 625605798798-ho25ff0d3tejacgu4i15lf2kb2v1gavb.apps.googleusercontent.com&ndash;&gt;-->
+   <!--API Key  AIzaSyAdCujIsv4KZbNE9im-ebm35kf3Yt38OW4-->
+    <string name="facebook_app_id">403281940315134</string>
+    <string name="fb_login_protocol_scheme">fb403281940315134</string>
+</resources>
