@@ -4,4 +4,46 @@
    <!--API Key  AIzaSyAdCujIsv4KZbNE9im-ebm35kf3Yt38OW4-->
     <string name="facebook_app_id">403281940315134</string>
     <string name="fb_login_protocol_scheme">fb403281940315134</string>
+    <string name="EXTRAS_ID">ID</string>
+    <string name="txt_default_name">Name</string>
+    <string name="txt_default_surname">Surname</string>
+    <string name="txt_default_fathername">Father\'s name</string>
+    <string name="btn_text_get_user">GET USER</string>
+    <string name="et_hint_enter_user_id">Enter user ID</string>
+    <string name="txt_def_error">Error</string>
+    <string name="et_hint_enter_your_name">Enter your name</string>
+    <string name="et_hint_enter_your_surname">Enter your surname</string>
+    <string name="et_hint_enter_your_fathername">Enter your father\'s name</string>
+    <string name="btn_text_add_user">Add User</string>
+    <string name="text_add_response_message">Add response message</string>
+    <string name="btn_text_save">Save</string>
+    <string name="btn_text_delete_user">Delete User</string>
+    <string name="text_file_select">Select File to upload</string>
+    <string name="btn_text_select_file">Select file</string>
+    <string name="bottom_item_themes">Themes</string>
+    <string name="bottom_item_profile">Profile</string>
+    <string name="bottom_item_people">People</string>
+    <string name="bottom_item_messages">Messages</string>
+    <string name="ok">Ok</string>
+    <string name="network_offline">offline</string>
+    <string name="root_detection_description">root detection description</string>
+    <string name="settings">settings</string>
+    <!--auth-->
+    <string name="password_recovery">PASSWORD\nRECOVERY</string>
+    <string name="get_a_password">GET A PASSWORD</string>
+    <string name="enter_the_pass">Enter the password you used\nto create your account</string>
+    <string name="hint_email">Enter your email</string>
+    <string name="hint_password">Enter your password</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="dont_have_an_account">Don`t have an account?</string>
+    <string name="you_can_sign_in_with">You can sign in with</string>
+    <string name="text_i_agree_with">I agree with</string>
+    <string name="text_terms_and_privacy">Terms and Privacy</string>
+    <string name="text_you_can_sign_up_with">You can sign up with</string>
+    <string name="text_have_an_account">Have an account?</string>
+    <string name="enter_your_name_and_surname">Enter your name and surname</string>
+    <string name="choose_password">Choose password</string>
+    <string name="repeat_password">Repeat password</string>
 </resources>

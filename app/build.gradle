@@ -33,6 +33,10 @@ android {
 
 }
 
+ext {
+    retrofit = '2.3.0'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -52,4 +56,14 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.facebook.android:facebook-android-sdk:4.28.0'
     implementation 'com.facebook.android:facebook-login:[5,6)'
+
+    implementation "com.squareup.retrofit2:converter-gson:${retrofit}"
+
+    // Glide
+    def glideVersion = "4.8.0"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+    implementation("com.github.bumptech.glide:recyclerview-integration:$glideVersion") {
+        transitive = false
+    }
 }
