@@ -11,7 +11,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/guideline_start"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="@dimen/indentation_16"/>
+            app:layout_constraintGuide_begin="-80dp"/>
 
     <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
@@ -186,7 +186,7 @@
             android:layout_width="@dimen/indentation_32"
             android:layout_height="@dimen/indentation_32"
             android:layout_marginTop="@dimen/indentation_16"
-            android:src="@mipmap/facebook_logo_auth"
+            android:src="@mipmap/facebook_logo"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_you_can_sign_up_with"/>

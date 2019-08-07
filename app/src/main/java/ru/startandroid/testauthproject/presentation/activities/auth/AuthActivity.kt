@@ -1,13 +1,85 @@
 package ru.startandroid.testauthproject.presentation.activities.auth
 
-import androidx.appcompat.app.AppCompatActivity
+
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import ru.startandroid.testauthproject.R
+import ru.startandroid.testauthproject.presentation.activities.auth.flow.AuthFlowModel
+import ru.startandroid.testauthproject.presentation.activities.auth.flow.IAuthFlow
+import ru.startandroid.testauthproject.presentation.base.BaseActivity
+import ru.startandroid.testauthproject.presentation.fragments.RecoverAccountFragment
+import ru.startandroid.testauthproject.presentation.fragments.SignInFragment
+import ru.startandroid.testauthproject.presentation.fragments.SingUpFragment
+import ru.startandroid.testauthproject.utils.extention.ApplicationConstants
+import ru.startandroid.testauthproject.utils.extention.hideKeyboard
 
-class AuthActivity : AppCompatActivity() {
+class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
+
+    companion object {
+        @JvmStatic
+        fun newInstanceWithClearStack(context: Context, typeScreen: IAuthFlow.NavigationType): Intent {
+            return Intent(context, AuthActivity::class.java).apply {
+                this.putExtra(ApplicationConstants.AUTH_TYPE_SCREEN, typeScreen)
+                this.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+        }
+    }
+
+//    override fun injectDependency(component: ViewModelComponent) {
+//
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
+        handleIntent()
+    }
+
+    override fun authRequest(flowModel: AuthFlowModel, callback: IAuthFlow.IAuthCallback) {
+        when (flowModel.type) {
+            IAuthFlow.AuthType.SIGN_IN -> {
+
+            }
+
+            IAuthFlow.AuthType.SIGN_UP -> {
+
+            }
+
+            IAuthFlow.AuthType.RECOVER_ACCOUNT -> {
+
+            }
+        }
+    }
+
+    override fun socialAuth(type: IAuthFlow.SocialAuthType, callback: IAuthFlow.IAuthCallback) {
+        when (type) {
+            IAuthFlow.SocialAuthType.FACEBOOK -> {
+
+            }
+            IAuthFlow.SocialAuthType.GOOGLE -> {
+
+            }
+        }
+    }
+
+    override fun openScreen(typeScreen: IAuthFlow.NavigationType) {
+        when (typeScreen) {
+            IAuthFlow.NavigationType.SIGN_IN_SCREEN -> {
+                replaceFragment(R.id.auth_container, SignInFragment.newInstance())
+            }
+            IAuthFlow.NavigationType.SIGN_UP_SCREEN -> {
+                replaceFragment(R.id.auth_container, SingUpFragment.newInstance())
+
+            }
+            IAuthFlow.NavigationType.RECOVER_ACCOUNT_SCREEN -> {
+                replaceFragment(R.id.auth_container, RecoverAccountFragment.newInstance())
+            }
+        }
+    }
+
+    private fun handleIntent(){
+        openScreen(intent?.extras?.getSerializable(ApplicationConstants.AUTH_TYPE_SCREEN) as IAuthFlow.NavigationType)
+        hideKeyboard()
     }
 }

@@ -47,4 +47,9 @@ class SignInFragment : BaseAuthFragment(), IAuthFlow.IAuthCallback {
                 }
             }
     }
+
+//    fun IAuthFlow.NavigationType() {
+//        if (listener != null) listener.socialAuth(IAuthFlow.NavigationType.SIGN_IN_SCREEN, this)
+//    }
+
 }
