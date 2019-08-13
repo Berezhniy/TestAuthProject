@@ -4,6 +4,8 @@ package ru.startandroid.testauthproject.presentation.activities.auth
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import ru.startandroid.testauthproject.R
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.AuthFlowModel
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.IAuthFlow
@@ -13,6 +15,10 @@ import ru.startandroid.testauthproject.presentation.fragments.SignInFragment
 import ru.startandroid.testauthproject.presentation.fragments.SingUpFragment
 import ru.startandroid.testauthproject.utils.extention.ApplicationConstants
 import ru.startandroid.testauthproject.utils.extention.hideKeyboard
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import kotlinx.android.synthetic.main.fragment_sign_in.*
+
 
 class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
 
@@ -27,6 +33,15 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
     }
 
 //    override fun injectDependency(component: ViewModelComponent) {
+//
+//    }
+//    override fun onStart() {
+//        super.onStart()
+////    val account = GoogleSignIn.getLastSignedInAccount(this)
+////    updateUI(account)
+//    }
+
+//    private fun updateUI(account: GoogleSignInAccount?) {
 //
 //    }
 
@@ -66,20 +81,28 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
     override fun openScreen(typeScreen: IAuthFlow.NavigationType) {
         when (typeScreen) {
             IAuthFlow.NavigationType.SIGN_IN_SCREEN -> {
-                replaceFragment(R.id.auth_container, SignInFragment.newInstance())
+                supportFragmentManager.beginTransaction().replace(R.id.auth_container, SignInFragment.newInstance()).commit()
+//                replaceFragment(R.id.auth_container, SignInFragment.newInstance())
             }
+
             IAuthFlow.NavigationType.SIGN_UP_SCREEN -> {
-                replaceFragment(R.id.auth_container, SingUpFragment.newInstance())
+                supportFragmentManager.beginTransaction().replace(R.id.auth_container, SingUpFragment.newInstance()).commit()
+//                replaceFragment(R.id.auth_container, SingUpFragment.newInstance())
 
             }
             IAuthFlow.NavigationType.RECOVER_ACCOUNT_SCREEN -> {
-                replaceFragment(R.id.auth_container, RecoverAccountFragment.newInstance())
+                supportFragmentManager.beginTransaction().replace(R.id.auth_container, RecoverAccountFragment.newInstance()).commit()
+//                replaceFragment(R.id.auth_container, RecoverAccountFragment.newInstance())
             }
         }
     }
 
     private fun handleIntent(){
-        openScreen(intent?.extras?.getSerializable(ApplicationConstants.AUTH_TYPE_SCREEN) as IAuthFlow.NavigationType)
+        openScreen(IAuthFlow.NavigationType.SIGN_IN_SCREEN)
         hideKeyboard()
     }
+    var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        .requestEmail()
+        .build()
+
 }

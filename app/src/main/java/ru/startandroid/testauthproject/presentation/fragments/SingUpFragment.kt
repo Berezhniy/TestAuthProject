@@ -2,6 +2,7 @@ package ru.startandroid.testauthproject.presentation.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import ru.startandroid.testauthproject.R
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.AuthFlowErrorModel
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.IAuthFlow
@@ -25,6 +26,11 @@ class SingUpFragment : BaseAuthFragment(), IAuthFlow.IAuthCallback {
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
         }
+    }
+
+
+    override fun viewLogic(view: View) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onDetach() {

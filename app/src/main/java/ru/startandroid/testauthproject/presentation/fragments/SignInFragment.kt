@@ -1,7 +1,13 @@
 package ru.startandroid.testauthproject.presentation.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import kotlinx.android.synthetic.main.fragment_sign_in.*
 import ru.startandroid.testauthproject.R
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.AuthFlowErrorModel
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.IAuthFlow
@@ -16,6 +22,7 @@ class SignInFragment : BaseAuthFragment(), IAuthFlow.IAuthCallback {
         arguments?.let {
             //ToDo get extras from bundle
         }
+
     }
 
     override fun onAttach(context: Context) {
@@ -27,12 +34,28 @@ class SignInFragment : BaseAuthFragment(), IAuthFlow.IAuthCallback {
         }
     }
 
+    override fun viewLogic(view: View) {
+when(view.id){
+    R.id.tvSignInForgotPassword ->{
+        fragmentManager!!.beginTransaction()
+            .replace(R.id.auth_container,RecoverAccountFragment.newInstance())
+            .commit()
+    }
+    R.id.tvSignInSignUp ->{
+        fragmentManager!!.beginTransaction()
+            .replace(R.id.auth_container,SingUpFragment.newInstance())
+            .commit()
+    }
+}
+
+    }
+
     override fun onDetach() {
         super.onDetach()
         listener = null
     }
 
-    override fun getLayout(): Int  = R.layout.fragment_sign_in
+    override fun getLayout(): Int = R.layout.fragment_sign_in
 
     override fun showError(error: AuthFlowErrorModel) {
         //ToDo show error for validation inputs
@@ -43,13 +66,13 @@ class SignInFragment : BaseAuthFragment(), IAuthFlow.IAuthCallback {
         fun newInstance() =
             SignInFragment().apply {
                 arguments = Bundle().apply {
-                   //ToDo put bundle
+                    //ToDo put bundle
                 }
             }
     }
 
-//    fun IAuthFlow.NavigationType() {
-//        if (listener != null) listener.socialAuth(IAuthFlow.NavigationType.SIGN_IN_SCREEN, this)
-//    }
+//  fun IAuthFlow.NavigationType() {
+//       if (listener != null) listener.socialAuth(IAuthFlow.NavigationType.SIGN_IN_SCREEN, this)
+//   }
 
 }
