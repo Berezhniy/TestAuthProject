@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/soft_blue">
@@ -75,7 +74,6 @@
                 android:layout_marginTop="@dimen/indentation_20"
                 android:layout_marginEnd="@dimen/indentation_20"
                 android:layout_marginBottom="@dimen/indentation_18"
-                android:onClick="viewLogic"
                 android:textColor="@color/text_color_blue"
                 android:textSize="@dimen/txt_size_12"
                 android:text="@string/forgot_your_password"/>
@@ -151,7 +149,6 @@
                 android:layout_marginBottom="@dimen/indentation_30"
                 android:background="@color/text_color_blue"
                 android:fontFamily="sans-serif-medium"
-                android:onClick="viewLogic"
                 android:textColor="@color/colorWhite"
                 android:textStyle="normal"
                 android:text="@string/sign_up"/>

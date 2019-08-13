@@ -81,17 +81,26 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
     override fun openScreen(typeScreen: IAuthFlow.NavigationType) {
         when (typeScreen) {
             IAuthFlow.NavigationType.SIGN_IN_SCREEN -> {
-                supportFragmentManager.beginTransaction().replace(R.id.auth_container, SignInFragment.newInstance()).commit()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.auth_container, SignInFragment.newInstance())
+                    .addToBackStack("AuthNavigationFragments")
+                    .commit()
 //                replaceFragment(R.id.auth_container, SignInFragment.newInstance())
             }
 
             IAuthFlow.NavigationType.SIGN_UP_SCREEN -> {
-                supportFragmentManager.beginTransaction().replace(R.id.auth_container, SingUpFragment.newInstance()).commit()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.auth_container, SingUpFragment.newInstance())
+                    .addToBackStack("AuthNavigationFragments")
+                    .commit()
 //                replaceFragment(R.id.auth_container, SingUpFragment.newInstance())
 
             }
             IAuthFlow.NavigationType.RECOVER_ACCOUNT_SCREEN -> {
-                supportFragmentManager.beginTransaction().replace(R.id.auth_container, RecoverAccountFragment.newInstance()).commit()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.auth_container, RecoverAccountFragment.newInstance())
+                    .addToBackStack("AuthNavigationFragments")
+                    .commit()
 //                replaceFragment(R.id.auth_container, RecoverAccountFragment.newInstance())
             }
         }
@@ -101,8 +110,8 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
         openScreen(IAuthFlow.NavigationType.SIGN_IN_SCREEN)
         hideKeyboard()
     }
-    var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-        .requestEmail()
-        .build()
+//    var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//        .requestEmail()
+//        .build()
 
 }
