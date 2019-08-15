@@ -66,6 +66,7 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
             .requestEmail()
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+        googleSignOut()
     }
 
     override fun onStart() {
@@ -99,11 +100,6 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
                 googleSignIn()
             }
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        googleSignOut()
     }
 
     override fun openScreen(typeScreen: IAuthFlow.NavigationType) {
