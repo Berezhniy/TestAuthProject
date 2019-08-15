@@ -3,6 +3,7 @@ package ru.startandroid.testauthproject.presentation.fragments
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import kotlinx.android.synthetic.main.fragment_sing_up.view.*
 import ru.startandroid.testauthproject.R
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.AuthFlowErrorModel
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.IAuthFlow
@@ -30,7 +31,7 @@ class SingUpFragment : BaseAuthFragment(), IAuthFlow.IAuthCallback {
 
 
     override fun viewLogic(view: View) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        view.tv_sign_in.setOnClickListener { listener!!.openScreen(IAuthFlow.NavigationType.SIGN_IN_SCREEN) }
     }
 
     override fun onDetach() {

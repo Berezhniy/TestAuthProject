@@ -1,13 +1,10 @@
 package ru.startandroid.testauthproject.presentation.fragments
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
 import kotlinx.android.synthetic.main.fragment_sign_in.*
+import kotlinx.android.synthetic.main.fragment_sign_in.view.*
 import ru.startandroid.testauthproject.R
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.AuthFlowErrorModel
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.IAuthFlow
@@ -35,19 +32,8 @@ class SignInFragment : BaseAuthFragment(), IAuthFlow.IAuthCallback {
     }
 
     override fun viewLogic(view: View) {
-when(view.id){
-    R.id.tvSignInForgotPassword ->{
-        fragmentManager!!.beginTransaction()
-            .replace(R.id.auth_container,RecoverAccountFragment.newInstance())
-            .commit()
-    }
-    R.id.tvSignInSignUp ->{
-        fragmentManager!!.beginTransaction()
-            .replace(R.id.auth_container,SingUpFragment.newInstance())
-            .commit()
-    }
-}
-
+        view.tvSignInForgotPassword.setOnClickListener { listener!!.openScreen(IAuthFlow.NavigationType.RECOVER_ACCOUNT_SCREEN) }
+        view.tvSignInSignUp.setOnClickListener { listener!!.openScreen(IAuthFlow.NavigationType.SIGN_UP_SCREEN) }
     }
 
     override fun onDetach() {
