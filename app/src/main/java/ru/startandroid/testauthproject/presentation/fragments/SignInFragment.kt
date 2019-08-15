@@ -34,6 +34,7 @@ class SignInFragment : BaseAuthFragment(), IAuthFlow.IAuthCallback {
     override fun viewLogic(view: View) {
         view.tvSignInForgotPassword.setOnClickListener { listener!!.openScreen(IAuthFlow.NavigationType.RECOVER_ACCOUNT_SCREEN) }
         view.tvSignInSignUp.setOnClickListener { listener!!.openScreen(IAuthFlow.NavigationType.SIGN_UP_SCREEN) }
+        view.iv_sign_in_google.setOnClickListener{ listener!!.socialAuth(IAuthFlow.SocialAuthType.GOOGLE, this)}
     }
 
     override fun onDetach() {
@@ -56,9 +57,4 @@ class SignInFragment : BaseAuthFragment(), IAuthFlow.IAuthCallback {
                 }
             }
     }
-
-//  fun IAuthFlow.NavigationType() {
-//       if (listener != null) listener.socialAuth(IAuthFlow.NavigationType.SIGN_IN_SCREEN, this)
-//   }
-
 }

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -30,7 +31,7 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
     private val fragmentManager: FragmentManager = supportFragmentManager
     private lateinit var gso: GoogleSignInOptions
     private lateinit var mGoogleSignInClient: GoogleSignInClient
-    private lateinit var googleAccount: GoogleSignInAccount
+    private var googleAccount: GoogleSignInAccount? = null
     private lateinit var task: Task<GoogleSignInAccount>
 
     companion object {
@@ -68,7 +69,7 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
 
     override fun onStart() {
         super.onStart()
-        googleAccount = GoogleSignIn.getLastSignedInAccount(this)!!
+        googleAccount = GoogleSignIn.getLastSignedInAccount(this)
         updateUI(googleAccount)
     }
 
@@ -102,27 +103,14 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
     override fun openScreen(typeScreen: IAuthFlow.NavigationType) {
         when (typeScreen) {
             IAuthFlow.NavigationType.SIGN_IN_SCREEN -> {
-                fragmentManager.beginTransaction()
-                    .replace(R.id.auth_container, SignInFragment.newInstance())
-                    .addToBackStack(null)
-                    .commit()
-//                replaceFragment(R.id.auth_container, SignInFragment.newInstance())
+                getOpenScreen(SignInFragment.newInstance())
             }
 
             IAuthFlow.NavigationType.SIGN_UP_SCREEN -> {
-                fragmentManager.beginTransaction()
-                    .replace(R.id.auth_container, SingUpFragment.newInstance())
-                    .addToBackStack(null)
-                    .commit()
-//                replaceFragment(R.id.auth_container, SingUpFragment.newInstance())
-
+                getOpenScreen(SingUpFragment.newInstance())
             }
             IAuthFlow.NavigationType.RECOVER_ACCOUNT_SCREEN -> {
-                fragmentManager.beginTransaction()
-                    .replace(R.id.auth_container, RecoverAccountFragment.newInstance())
-                    .addToBackStack(null)
-                    .commit()
-//                replaceFragment(R.id.auth_container, RecoverAccountFragment.newInstance())
+                getOpenScreen(RecoverAccountFragment.newInstance())
             }
         }
     }
@@ -154,8 +142,10 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
 
     private fun handleSignInResult(task: Task<GoogleSignInAccount>?) {
         try {
-            googleAccount = task!!.getResult(ApiException::class.java)!!
-            updateUI(googleAccount)
+            if (task != null) {
+                googleAccount = task.getResult(ApiException::class.java)
+                updateUI(googleAccount)
+            }
         } catch (e: ApiException) {
             Log.w("GoogleAuthException", "signInResult:failed code=" + e.statusCode)
             updateUI(null)
@@ -165,5 +155,12 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
     private fun googleSignIn() {
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    private fun getOpenScreen(fragment: Fragment){
+        fragmentManager.beginTransaction()
+            .replace(R.id.auth_container, fragment)
+            .addToBackStack("Auth")
+            .commit()
     }
 }
