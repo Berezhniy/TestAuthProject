@@ -157,7 +157,7 @@
 
         <com.google.android.gms.common.SignInButton
                 android:id="@+id/iv_sign_in_google"
-                android:layout_width="29dp"
+                android:layout_width="@dimen/indentation_30"
                 android:layout_height="wrap_content"
                 android:background="@mipmap/google_auth"
                 app:buttonSize="icon_only"

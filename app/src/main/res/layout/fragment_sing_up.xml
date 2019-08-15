@@ -222,23 +222,32 @@
                 android:text="@string/sign_in"/>
     </LinearLayout>
 
-    <com.google.android.gms.common.SignInButton
-            android:id="@+id/iv_sign_up_google"
-            android:layout_width="@dimen/view_params_36"
-            android:layout_height="@dimen/view_params_36"
-            app:layout_constraintTop_toBottomOf="@id/iv_facebook_login"
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/indentation_30"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/indentation_8"
-            android:background="@mipmap/google_auth"
-            app:buttonSize="icon_only"/>
-    <com.facebook.login.widget.LoginButton
-            android:id="@+id/iv_facebook_login"
-            android:layout_width="@dimen/indentation_32"
-            android:layout_height="@dimen/indentation_32"
             android:layout_marginTop="@dimen/indentation_16"
-            android:src="@mipmap/facebook_logo"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_you_can_sign_up_with" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_you_can_sign_up_with"
+            android:id="@+id/ll_sign_in_social_auth">
+
+    <com.google.android.gms.common.SignInButton
+            android:id="@+id/iv_sing_up_google"
+            android:layout_width="@dimen/indentation_30"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/google_auth"
+            app:buttonSize="icon_only"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/indentation_32"/>
+
+        <ImageView
+        android:id="@+id/iv_sign_up_facebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/indentation_8"
+        android:src="@mipmap/facebook_logo"
+        android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@id/tv_you_can_sign_up_with"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
