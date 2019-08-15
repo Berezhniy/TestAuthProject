@@ -92,8 +92,8 @@
 
     <ImageView
             android:id="@+id/iv_recover_account_back_arrow"
-            android:layout_width="@dimen/view_params_16"
-            android:layout_height="@dimen/view_params_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/indentation_16"
             android:layout_marginStart="@dimen/indentation_16"
             android:background="@mipmap/button_back"
