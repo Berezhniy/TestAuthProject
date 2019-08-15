@@ -4,9 +4,15 @@ package ru.startandroid.testauthproject.presentation.activities.auth
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import ru.startandroid.testauthproject.R
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.AuthFlowModel
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.IAuthFlow
@@ -16,14 +22,17 @@ import ru.startandroid.testauthproject.presentation.fragments.SignInFragment
 import ru.startandroid.testauthproject.presentation.fragments.SingUpFragment
 import ru.startandroid.testauthproject.utils.extention.ApplicationConstants
 import ru.startandroid.testauthproject.utils.extention.hideKeyboard
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 
 class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
 
-    val fragmentManager:FragmentManager = supportFragmentManager
+    private val RC_SIGN_IN: Int = 0
+    private val fragmentManager: FragmentManager = supportFragmentManager
+    private lateinit var gso: GoogleSignInOptions
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var googleAccount: GoogleSignInAccount
+    private lateinit var task: Task<GoogleSignInAccount>
+
     companion object {
         @JvmStatic
         fun newInstanceWithClearStack(context: Context, typeScreen: IAuthFlow.NavigationType): Intent {
@@ -51,6 +60,16 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
         handleIntent()
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        googleAccount = GoogleSignIn.getLastSignedInAccount(this)!!
+        updateUI(googleAccount)
     }
 
     override fun authRequest(flowModel: AuthFlowModel, callback: IAuthFlow.IAuthCallback) {
@@ -75,7 +94,7 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
 
             }
             IAuthFlow.SocialAuthType.GOOGLE -> {
-
+                googleSignIn()
             }
         }
     }
@@ -108,12 +127,43 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
         }
     }
 
-    private fun handleIntent(){
+    private fun handleIntent() {
         openScreen(IAuthFlow.NavigationType.SIGN_IN_SCREEN)
         hideKeyboard()
     }
-//    var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//        .requestEmail()
-//        .build()
 
+    private fun makeToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+    }
+
+    private fun updateUI(googleAcc: GoogleSignInAccount?) {
+        if (googleAcc != null)
+            makeToast("Successfully logged in")
+        else
+            makeToast("Not logged in")
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_SIGN_IN) {
+            task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleSignInResult(task)
+        }
+    }
+
+
+    private fun handleSignInResult(task: Task<GoogleSignInAccount>?) {
+        try {
+            googleAccount = task!!.getResult(ApiException::class.java)!!
+            updateUI(googleAccount)
+        } catch (e: ApiException) {
+            Log.w("GoogleAuthException", "signInResult:failed code=" + e.statusCode)
+            updateUI(null)
+        }
+    }
+
+    private fun googleSignIn() {
+        val signInIntent: Intent = mGoogleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
 }

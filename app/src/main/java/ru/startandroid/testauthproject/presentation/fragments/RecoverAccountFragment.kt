@@ -3,6 +3,7 @@ package ru.startandroid.testauthproject.presentation.fragments
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import kotlinx.android.synthetic.main.fragment_recover_account.view.*
 import ru.startandroid.testauthproject.R
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.AuthFlowErrorModel
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.IAuthFlow
@@ -30,7 +31,7 @@ class RecoverAccountFragment : BaseAuthFragment(), IAuthFlow.IAuthCallback {
     }
 
     override fun viewLogic(view: View) {
-
+        view.iv_recover_account_back_arrow.setOnClickListener { listener!!.openScreen(IAuthFlow.NavigationType.SIGN_IN_SCREEN) }
     }
 
     override fun onDetach() {
@@ -38,7 +39,7 @@ class RecoverAccountFragment : BaseAuthFragment(), IAuthFlow.IAuthCallback {
         listener = null
     }
 
-    override fun getLayout(): Int  = R.layout.fragment_recover_account
+    override fun getLayout(): Int = R.layout.fragment_recover_account
 
     override fun showError(error: AuthFlowErrorModel) {
         //ToDo show error for validation inputs
