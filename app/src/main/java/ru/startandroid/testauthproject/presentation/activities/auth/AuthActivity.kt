@@ -13,6 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import ru.startandroid.testauthproject.R
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.AuthFlowModel
@@ -100,6 +101,11 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        googleSignOut()
+    }
+
     override fun openScreen(typeScreen: IAuthFlow.NavigationType) {
         when (typeScreen) {
             IAuthFlow.NavigationType.SIGN_IN_SCREEN -> {
@@ -157,7 +163,14 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
-    private fun getOpenScreen(fragment: Fragment){
+    private fun googleSignOut() {
+        mGoogleSignInClient.signOut()
+            .addOnCompleteListener(this) {
+                makeToast("Successfully signed out")
+            }
+    }
+
+    private fun getOpenScreen(fragment: Fragment) {
         fragmentManager.beginTransaction()
             .replace(R.id.auth_container, fragment)
             .addToBackStack("Auth")
