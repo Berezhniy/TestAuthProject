@@ -1,6 +1,7 @@
 package ru.startandroid.testauthproject.presentation.activities.auth
 
 
+import android.app.SharedElementCallback
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -19,6 +20,7 @@ import ru.startandroid.testauthproject.utils.extention.hideKeyboard
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import kotlinx.android.synthetic.main.fragment_sign_in.*
+import javax.security.auth.callback.Callback
 
 
 class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {

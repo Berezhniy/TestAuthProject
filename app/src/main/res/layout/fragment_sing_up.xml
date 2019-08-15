@@ -181,15 +181,15 @@
             android:fontFamily="sans-serif-medium"
             android:textStyle="normal"/>
 
-    <ImageView
-            android:id="@+id/iv_facebook_login"
-            android:layout_width="@dimen/indentation_32"
-            android:layout_height="@dimen/indentation_32"
-            android:layout_marginTop="@dimen/indentation_16"
-            android:src="@mipmap/facebook_logo"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_you_can_sign_up_with"/>
+    <!--<ImageView-->
+            <!--android:id="@+id/iv_facebook_login"-->
+            <!--android:layout_width="@dimen/indentation_32"-->
+            <!--android:layout_height="@dimen/indentation_32"-->
+            <!--android:layout_marginTop="@dimen/indentation_16"-->
+            <!--android:src="@mipmap/facebook_logo"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/tv_you_can_sign_up_with"/>-->
 
 
     <LinearLayout
@@ -232,5 +232,13 @@
             android:layout_marginTop="@dimen/indentation_8"
             android:background="@mipmap/google_auth"
             app:buttonSize="icon_only"/>
-
+    <com.facebook.login.widget.LoginButton
+            android:id="@+id/iv_facebook_login"
+            android:layout_width="@dimen/indentation_32"
+            android:layout_height="@dimen/indentation_32"
+            android:layout_marginTop="@dimen/indentation_16"
+            android:src="@mipmap/facebook_logo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_you_can_sign_up_with" />
 </androidx.constraintlayout.widget.ConstraintLayout>
