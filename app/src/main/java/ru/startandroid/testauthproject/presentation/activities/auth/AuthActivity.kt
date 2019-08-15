@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.FragmentManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import ru.startandroid.testauthproject.R
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.AuthFlowModel
@@ -22,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
 
+    val fragmentManager:FragmentManager = supportFragmentManager
     companion object {
         @JvmStatic
         fun newInstanceWithClearStack(context: Context, typeScreen: IAuthFlow.NavigationType): Intent {
@@ -81,25 +83,25 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
     override fun openScreen(typeScreen: IAuthFlow.NavigationType) {
         when (typeScreen) {
             IAuthFlow.NavigationType.SIGN_IN_SCREEN -> {
-                supportFragmentManager.beginTransaction()
+                fragmentManager.beginTransaction()
                     .replace(R.id.auth_container, SignInFragment.newInstance())
-                    .addToBackStack("AuthNavigationFragments")
+                    .addToBackStack(null)
                     .commit()
 //                replaceFragment(R.id.auth_container, SignInFragment.newInstance())
             }
 
             IAuthFlow.NavigationType.SIGN_UP_SCREEN -> {
-                supportFragmentManager.beginTransaction()
+                fragmentManager.beginTransaction()
                     .replace(R.id.auth_container, SingUpFragment.newInstance())
-                    .addToBackStack("AuthNavigationFragments")
+                    .addToBackStack(null)
                     .commit()
 //                replaceFragment(R.id.auth_container, SingUpFragment.newInstance())
 
             }
             IAuthFlow.NavigationType.RECOVER_ACCOUNT_SCREEN -> {
-                supportFragmentManager.beginTransaction()
+                fragmentManager.beginTransaction()
                     .replace(R.id.auth_container, RecoverAccountFragment.newInstance())
-                    .addToBackStack("AuthNavigationFragments")
+                    .addToBackStack(null)
                     .commit()
 //                replaceFragment(R.id.auth_container, RecoverAccountFragment.newInstance())
             }

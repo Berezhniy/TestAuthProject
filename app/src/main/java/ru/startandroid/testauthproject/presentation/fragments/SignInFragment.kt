@@ -32,14 +32,6 @@ class SignInFragment : BaseAuthFragment(), IAuthFlow.IAuthCallback {
     }
 
     override fun viewLogic(view: View) {
-//        when (view.id) {
-//            R.id.tvSignInForgotPassword -> {
-//                listener!!.openScreen(IAuthFlow.NavigationType.RECOVER_ACCOUNT_SCREEN)
-//            }
-//            R.id.tvSignInSignUp -> {
-//                listener!!.openScreen(IAuthFlow.NavigationType.SIGN_UP_SCREEN)
-//            }
-//        }
         view.tvSignInForgotPassword.setOnClickListener { listener!!.openScreen(IAuthFlow.NavigationType.RECOVER_ACCOUNT_SCREEN) }
         view.tvSignInSignUp.setOnClickListener { listener!!.openScreen(IAuthFlow.NavigationType.SIGN_UP_SCREEN) }
     }
