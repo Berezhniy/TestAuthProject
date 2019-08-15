@@ -36,4 +36,5 @@
     <dimen name="view_params_65">65dp</dimen>
     <dimen name="view_params_165">165dp</dimen>
     <dimen name="view_params_280">280dp</dimen>
+    <dimen name="view_params_64">64dp</dimen>
 </resources>

@@ -110,17 +110,6 @@
             android:text="@string/you_can_sign_in_with"/>
 
 
-    <!--<ImageView-->
-            <!--android:id="@+id/btnSignInFacebook"-->
-            <!--android:layout_width="20dp"-->
-            <!--android:layout_height="19dp"-->
-            <!--android:layout_marginTop="@dimen/indentation_16"-->
-            <!--android:src="@mipmap/facebook_logo"-->
-            <!--app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--app:layout_constraintRight_toRightOf="parent"-->
-            <!--app:layout_constraintTop_toBottomOf="@id/tvSignInSocialLabel"/>-->
-
-
     <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -128,7 +117,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/ll_sign_in_sign_up">
 
         <TextView
                 android:id="@+id/tvSignInNoAccount"
@@ -155,24 +145,40 @@
                 android:text="@string/sign_up"/>
     </LinearLayout>
 
-    <com.google.android.gms.common.SignInButton
-            android:id="@+id/iv_sign_in_google"
-            android:layout_width="@dimen/view_params_36"
-            android:layout_height="@dimen/view_params_36"
-            app:layout_constraintTop_toBottomOf="@id/btnSignInFacebook"
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/indentation_30"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/indentation_8"
-            android:background="@mipmap/google_auth"
-            app:buttonSize="icon_only"/>
-
-    <com.facebook.login.widget.LoginButton
-            android:id="@+id/btnSignInFacebook"
-            android:layout_width="@dimen/view_params_36"
-            android:layout_height="@dimen/view_params_36"
             android:layout_marginTop="@dimen/indentation_16"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSignInSocialLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/tvSignInSocialLabel"
+            android:id="@+id/ll_sign_in_social_auth">
+
+        <com.google.android.gms.common.SignInButton
+                android:id="@+id/iv_sign_in_google"
+                android:layout_width="29dp"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/google_auth"
+                app:buttonSize="icon_only"
+                android:layout_weight="1"
+        android:layout_marginEnd="@dimen/indentation_32"/>
+
+        <ImageView
+                android:id="@+id/btnSignInFacebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/indentation_8"
+                android:src="@mipmap/facebook_logo"
+                android:layout_weight="1"
+        />
+
+        <!--<com.facebook.login.widget.LoginButton-->
+        <!--android:id="@+id/btnSignInFacebook"-->
+        <!--android:layout_width="@dimen/view_params_36"-->
+        <!--android:layout_height="@dimen/view_params_36"-->
+        <!--android:layout_marginTop="@dimen/indentation_16"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/tvSignInSocialLabel"/>-->
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
