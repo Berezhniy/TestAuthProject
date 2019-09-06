@@ -28,6 +28,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+
     }
     repositories {
         mavenCentral()
@@ -38,6 +44,12 @@ android {
 
 ext {
     retrofit = '2.3.0'
+    room = '1.1.1'
+    viewmodel = '1.1.1'
+    dagger = '2.15'
+    log = '3.8.1'
+    paging = '1.0.1'
+    glideVersion = "4.8.0"
 }
 
 dependencies {
@@ -62,7 +74,34 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:4.28.0'
     implementation 'com.facebook.android:facebook-login:[5,6)'
 
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${retrofit}"
+    implementation "com.squareup.retrofit2:converter-moshi:${retrofit}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofit}"
+
+    // Rx
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.0.0'
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+    implementation "io.reactivex.rxjava2:rxjava:2.2.7"
+
+    // ViewModel and LiveData
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.0.0'
+
+    // Room
+    implementation 'androidx.room:room-runtime:2.1.0'
+    kapt 'androidx.room:room-compiler:2.1.0'
+
+    // Dagger
+    implementation "com.google.dagger:dagger:${dagger}"
+    kapt "com.google.dagger:dagger-compiler:${dagger}"
+
+    // Logging
+    implementation "com.squareup.okhttp3:logging-interceptor:${log}"
+
+    // Paging
+    implementation 'androidx.paging:paging-runtime:2.1.0'
 
     // Glide
     def glideVersion = "4.8.0"

@@ -2,6 +2,8 @@ package ru.startandroid.testauthproject.presentation.activities.auth.flow
 
 interface IAuthFlow {
 
+    public var SIGN_IN_RC: Int
+
     // for open screen by type
     enum class NavigationType {
         SIGN_IN_SCREEN, SIGN_UP_SCREEN, RECOVER_ACCOUNT_SCREEN

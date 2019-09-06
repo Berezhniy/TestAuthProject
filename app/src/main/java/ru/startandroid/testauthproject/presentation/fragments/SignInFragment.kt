@@ -3,7 +3,6 @@ package ru.startandroid.testauthproject.presentation.fragments
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import kotlinx.android.synthetic.main.fragment_sign_in.*
 import kotlinx.android.synthetic.main.fragment_sign_in.view.*
 import ru.startandroid.testauthproject.R
 import ru.startandroid.testauthproject.presentation.activities.auth.flow.AuthFlowErrorModel
@@ -34,7 +33,7 @@ class SignInFragment : BaseAuthFragment(), IAuthFlow.IAuthCallback {
     override fun viewLogic(view: View) {
         view.tvSignInForgotPassword.setOnClickListener { listener!!.openScreen(IAuthFlow.NavigationType.RECOVER_ACCOUNT_SCREEN) }
         view.tvSignInSignUp.setOnClickListener { listener!!.openScreen(IAuthFlow.NavigationType.SIGN_UP_SCREEN) }
-        view.iv_sign_in_google.setOnClickListener{ listener!!.socialAuth(IAuthFlow.SocialAuthType.GOOGLE, this)}
+        view.iv_sign_in_google.setOnClickListener { listener!!.socialAuth(IAuthFlow.SocialAuthType.GOOGLE, this) }
     }
 
     override fun onDetach() {
