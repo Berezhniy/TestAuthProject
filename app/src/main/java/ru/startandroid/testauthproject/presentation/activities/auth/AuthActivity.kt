@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.facebook.CallbackManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -24,10 +25,23 @@ import ru.startandroid.testauthproject.presentation.fragments.SignInFragment
 import ru.startandroid.testauthproject.presentation.fragments.SingUpFragment
 import ru.startandroid.testauthproject.utils.extention.ApplicationConstants
 import ru.startandroid.testauthproject.utils.extention.hideKeyboard
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.FacebookException
+import org.json.JSONException
+import com.facebook.GraphResponse
+import org.json.JSONObject
+import com.facebook.GraphRequest
+import com.facebook.login.LoginResult
+import com.facebook.FacebookCallback
+import com.facebook.login.LoginManager
+import java.util.Arrays.asList
+import java.util.*
 
 
 class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
 
+    private val callbackManager: CallbackManager = CallbackManager.Factory.create()
     private val RC_SIGN_IN: Int = 0
     private val fragmentManager: FragmentManager = supportFragmentManager
     private lateinit var gso: GoogleSignInOptions
@@ -61,12 +75,15 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
+//        FacebookSdk.sdkInitialize(getApplicationContext())
+//        AppEventsLogger.activateApp(this)
         handleIntent()
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
         googleSignOut()
+
     }
 
     override fun onStart() {
@@ -94,7 +111,7 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
     override fun socialAuth(type: IAuthFlow.SocialAuthType, callback: IAuthFlow.IAuthCallback) {
         when (type) {
             IAuthFlow.SocialAuthType.FACEBOOK -> {
-
+                Fblogin()
             }
             IAuthFlow.SocialAuthType.GOOGLE -> {
                 googleSignIn()
@@ -134,6 +151,7 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
             task = GoogleSignIn.getSignedInAccountFromIntent(data)
@@ -171,5 +189,50 @@ class AuthActivity : BaseActivity(), IAuthFlow.IAuthListener {
             .replace(R.id.auth_container, fragment)
             .addToBackStack("Auth")
             .commit()
+    }
+
+    private fun Fblogin() {
+        // Set permissions
+        LoginManager.getInstance()
+            .logInWithReadPermissions(this, Arrays.asList("email", "public_profile"))
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+            object : FacebookCallback<LoginResult> {
+                override fun onSuccess(loginResult: LoginResult) {
+                    makeToast("Successfully logged in")
+//                    GraphRequest.newMeRequest(
+//                        loginResult.accessToken
+//                    ) { json, response ->
+//                        if (response.error != null) {
+//                            // handle error
+//                            println("ERROR")
+//                        } else {
+//                            println("Success")
+//                            try {
+//
+//                                val jsonresult = (json).toString()
+//                                println("JSON Result$jsonresult")
+//
+//                                val str_email = json.getString("email")
+//                                val str_id = json.getString("id")
+//                                val str_firstname = json.getString("first_name")
+//                                val str_lastname = json.getString("last_name")
+//
+//                            } catch (e: JSONException) {
+//                                e.printStackTrace()
+//                            }
+//
+//                        }
+//                    }.executeAsync()
+                }
+
+                override fun onCancel() {
+                    Log.d("CANCELED", "On cancel")
+                }
+
+                override fun onError(error: FacebookException) {
+                    Log.d("ERROR", error.toString())
+                }
+            })
     }
 }

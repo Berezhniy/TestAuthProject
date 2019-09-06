@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/soft_blue">
 
@@ -172,13 +173,6 @@
                 android:src="@mipmap/facebook_logo"
                 android:layout_weight="1"
         />
-
-        <!--<com.facebook.login.widget.LoginButton-->
-        <!--android:id="@+id/btnSignInFacebook"-->
-        <!--android:layout_width="@dimen/view_params_36"-->
-        <!--android:layout_height="@dimen/view_params_36"-->
-        <!--android:layout_marginTop="@dimen/indentation_16"-->
-        <!--app:layout_constraintTop_toBottomOf="@id/tvSignInSocialLabel"/>-->
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
