@@ -1,9 +1,86 @@
 package ru.startandroid.testauthproject.presentation.activities.auth.flow
 
-class AuthFlowModel(var type: IAuthFlow.AuthType? = null,
-                    var email : String? = null,
-                    var password : String? = null,
-                    var passwordConfirm : String? = null,
-                    var isAcceptTerms : Boolean? = false) {
+/**
+ *
+ */
+const val typeChildField: String="typeChild"
+/**
+ *
+ */
+const val errorField: String="error"
+/**
+ *
+ */
+const val emailField: String="email"
+/**
+ *
+ */
+const val passwordField: String="password"
+/**
+ *
+ */
+const val passwordConfirmField: String="passwordConfirm"
+/**
+ *
+ */
+const val agreeTermsField: String="agreeTerms"
 
+/**
+ * @author Kalashnyk Denys e-mail: kalashnyk.denys@gmail.com
+ */
+class AuthFlowModel(type: IAuthFlow.AuthType) : BaseChildModel() {
+
+    /**
+     * @field typeChild
+     */
+    var typeChild: IAuthFlow.AuthType=type
+        set(value) {
+            field=value
+            setChangedAndNotify(typeChildField)
+        }
+
+    /**
+     * @field emailField
+     */
+    var email: String = ""
+        set(value) {
+            field=value
+            setChangedAndNotify(emailField)
+        }
+
+    /**
+     * @field password
+     */
+    var password: String=""
+        set(value) {
+            field=value
+            setChangedAndNotify(passwordField)
+        }
+
+    /**
+     * @field passwordConfirm
+     */
+    var passwordConfirm: String=""
+        set(value) {
+            field=value
+            setChangedAndNotify(passwordConfirmField)
+        }
+
+    /**
+     * @field agreeTerms
+     */
+    var agreeTerms: Boolean=false
+        set(value) {
+            field=value
+            setChangedAndNotify(agreeTermsField)
+        }
+
+    /**
+     * @field error
+     */
+    var error: AuthFlowErrorModel=AuthFlowErrorModel()
+        set(value) {
+            field=value
+            setChangedAndNotify("error")
+        }
 }

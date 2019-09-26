@@ -1,21 +1,51 @@
 package ru.startandroid.testauthproject.presentation.activities.auth.flow
 
-class AuthFlowErrorModel(var type : AuthFlowErrorType,
-                         var message : String) {
+import ru.startandroid.testauthproject.utils.validation.ValidationErrorMessage
 
-    // todo maybe need create rout type for navigation
-    enum class AuthFlowErrorType{
-        //when validation fail email field
+/**
+ * error of validation and api
+ */
+class AuthFlowErrorModel(
+    /**
+     * errors body
+     */
+    var errors: Map<ErrorType, ValidationErrorMessage> = HashMap()
+) {
+    constructor() : this(HashMap())
+
+    /**
+     *
+     */
+    fun hasErrors(): Boolean = errors.isNotEmpty()
+
+    /**
+     *
+     */
+    fun emptyErrors(): Boolean = errors.isEmpty()
+
+    /**
+     *
+     */
+    enum class ErrorType {
+
+        /**
+         * when validation fail email field
+         */
         EMAIL_ERROR,
-        //when validation fail password field
+
+        /**
+         * when validation fail password field
+         */
         PASSWORD_ERROR,
-        //when validation fail with password and confirm password fields
+
+        /**
+         * when validation fail with password and confirm password fields
+         */
         PASSWORD_CONFIRM_ERROR,
-        //when user don't accept terms conditions
+
+        /**
+         * when user don't accept terms conditions
+         */
         TERMS_CONDITION_ERROR,
-        //when user don't fill all fields of sign up screen
-        SIGN_UP_ERROS,
-        //when user don't fill all fields of sign in screen
-        SIGN_IN_ERROS,
     }
 }
